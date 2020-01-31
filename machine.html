@@ -54,27 +54,41 @@
           return Math.floor(Math.random() * Math.floor(max));
         }
 
+        function initGallery(images) {
+          const div = document.getElementById('target');
+          let titlePlate = document.createElement('div');
+          let img = document.createElement('img');
+          titlePlate.className = 'titlePlate';
+          div.appendChild(img);
+          div.appendChild(titlePlate);
+
+          const mount = (work, index) => {
+            titlePlate.innerHTML = `
+                <h3>E. Konetzni (b. 1983)</h3>
+                <h2><span class="italic">${work.title}</span>, ${work.date}</h2>
+                <p>Late post-industrial digital mediums ${index} of ${images.length}</p>
+                `;
+            img.src = work.url;
+            img.style.height = '100%';
+            img.style.width = '100%';
+            div.setAttribute('data-current-index', index);
+          };
+
+          const start = getRandomInt(images.length - 1);
+          mount(images[start], start);
+
+          div.addEventListener('click', function(e) {
+            const currentIndex = Number(div.getAttribute('data-current-index'));
+            const newIndex =
+              currentIndex >= images.length ? 0 : currentIndex + 1;
+            mount(images[newIndex], newIndex);
+          });
+        }
+
         fetch('manifest.json')
           .then(res => res.json())
           .then(manifest => manifest.images)
-          .then(images => {
-            const index = getRandomInt(images.length - 1);
-            const data = images[index];
-            let titlePlate = document.createElement('div');
-            titlePlate.className = 'titlePlate';
-            titlePlate.innerHTML = `
-            <h3>E. Konetzni (b. 1983)</h3>
-            <h2><span class="italic">${data.title}</span>, ${data.date}</h2>
-            <p>Late post-industrial digital mediums ${index} of ${images.length}</p>
-            `;
-            let img = document.createElement('img');
-            img.src = data.url;
-            img.style.height = '100%';
-            img.style.width = '100%';
-            const div = document.getElementById('target');
-            div.appendChild(img);
-            div.appendChild(titlePlate);
-          });
+          .then(images => initGallery(images));
       })();
     </script>
   </body>

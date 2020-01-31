@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Not a gallery</title>
+    <style type="text/css">
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+      }
+
+      #target {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+      }
+      .italic {
+        font-style: italic;
+      }
+      h2,
+      h3,
+      p {
+        margin: 0;
+        margin-bottom: 4px;
+      }
+      h2 {
+        font-size: 14px;
+      }
+      h3 {
+        font-size: 14px;
+      }
+      p {
+        font-size: 10px;
+      }
+      .titlePlate {
+        position: absolute;
+        z-index: 999;
+        bottom: 4px;
+        left: 4px;
+        padding: 4px;
+        color: white;
+        background: rgba(12, 12, 12, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="target">&nbsp;</div>
+    <script type="text/javascript">
+      (function() {
+        function getRandomInt(max) {
+          return Math.floor(Math.random() * Math.floor(max));
+        }
+
+        fetch('manifest.json')
+          .then(res => res.json())
+          .then(manifest => manifest.images)
+          .then(images => {
+            const index = getRandomInt(images.length - 1);
+            const data = images[index];
+            let titlePlate = document.createElement('div');
+            titlePlate.className = 'titlePlate';
+            titlePlate.innerHTML = `
+            <h3>E. Konetzni (b. 1983)</h3>
+            <h2><span class="italic">${data.title}</span>, ${data.date}</h2>
+            <p>Late post-industrial digital mediums ${index} of ${images.length}</p>
+            `;
+            let img = document.createElement('img');
+            img.src = data.url;
+            img.style.height = '100%';
+            img.style.width = '100%';
+            const div = document.getElementById('target');
+            div.appendChild(img);
+            div.appendChild(titlePlate);
+          });
+      })();
+    </script>
+  </body>
+</html>

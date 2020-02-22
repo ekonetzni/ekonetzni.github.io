@@ -101,7 +101,7 @@
           div.setAttribute('data-current-index', index);
         };
 
-        const start = urlParams('beginAt') || getRandomInt(images.length - 1);
+        const start = urlParams.get('beginAt') || getRandomInt(images.length - 1);
         mount(images[start], start);
 
         div.addEventListener('click', function (e) {

@@ -107,7 +107,7 @@
         div.addEventListener('click', function (e) {
           const currentIndex = Number(div.getAttribute('data-current-index'));
           const newIndex =
-            currentIndex >= images.length ? 0 : currentIndex + 1;
+            currentIndex >= (images.length - 1) ? 0 : currentIndex + 1;
           mount(images[newIndex], newIndex);
         });
       }

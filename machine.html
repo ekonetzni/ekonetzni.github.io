@@ -104,12 +104,27 @@
         const start = urlParams.get('beginAt') || getRandomInt(images.length - 1);
         mount(images[start], start);
 
-        div.addEventListener('click', function (e) {
+        const _advance = e => {
           const currentIndex = Number(div.getAttribute('data-current-index'));
           const newIndex =
             currentIndex >= (images.length - 1) ? 0 : currentIndex + 1;
           mount(images[newIndex], newIndex);
-        });
+        }
+        const _retreat = e => {
+          const currentIndex = Number(div.getAttribute('data-current-index'));
+          const newIndex =
+            currentIndex <= 0 ? (images.length - 1) : currentIndex - 1;
+          mount(images[newIndex], newIndex);
+        }
+        const _keyEvents = e => {
+          if (e.keyCode === 39) {
+            _advance(e);
+          } else if (e.keyCode === 37) {
+            _retreat(e);
+          }
+        }
+        div.addEventListener('click', _advance);
+        div.addEventListener('onkeydown', _keyEvents);
       }
 
       fetch('manifest.json')

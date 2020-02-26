@@ -95,7 +95,7 @@
                 <h2><span class="italic">${work.title}</span>, ${work.date}</h2>
                 <p>Post-industrial waste ${index} of ${images.length}</p>
                 `;
-          img.src = work.url;
+          img.src = encodeURIComponent(work.url);
           img.style.height = '100%';
           img.style.width = '100%';
           div.setAttribute('data-current-index', index);

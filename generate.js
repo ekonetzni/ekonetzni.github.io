@@ -4,7 +4,7 @@ const fs = require('fs');
 // Gives us the name at index 2.
 const regex = /([0-9]{10}\.[0-9]{1,})-(.*)\..*\.[a-z0-9]*$/;
 
-const prefixes = ['img/gen1i'];
+const prefixes = ['img/gen1i', 'img/faces'];
 
 const _date = timestamp => {
   const d = new Date(timestamp * 1000);

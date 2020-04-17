@@ -1,141 +1,146 @@
 <!DOCTYPE html>
 <html lang="en-us">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Description" content="Elliot Konetzni, fine artist" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-25702095-1"
+    ></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-25702095-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="Description" content="Elliot Konetzni, fine artist" />
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-25702095-1"></script>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-25702095-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
+      gtag('config', 'UA-25702095-1');
+    </script>
 
-    gtag('config', 'UA-25702095-1');
-  </script>
-
-  <title>Post-industrial waste</title>
-  <style type="text/css">
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-    }
-
-    #target {
-      display: inline-block;
-      box-sizing: border-box;
-      width: 100%;
-      height: 100%;
-    }
-
-    .italic {
-      font-style: italic;
-    }
-
-    h2,
-    h3,
-    p {
-      margin: 0;
-      margin-bottom: 4px;
-    }
-
-    h2 {
-      font-size: 14px;
-    }
-
-    h3 {
-      font-size: 14px;
-    }
-
-    p {
-      font-size: 10px;
-    }
-
-    .titlePlate {
-      position: absolute;
-      z-index: 999;
-      bottom: 4px;
-      left: 4px;
-      padding: 4px;
-      color: white;
-      background: rgba(12, 12, 12, 0.2);
-    }
-  </style>
-</head>
-
-<body>
-  <div id="target">&nbsp;</div>
-  <script type="text/javascript">
-    (function () {
-      const urlParams = new URLSearchParams(window.location.search);
-
-      function getRandomInt(max) {
-        return Math.floor(Math.random() * Math.floor(max));
+    <title>E. Konetzni - Boxmaker</title>
+    <style type="text/css">
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
       }
 
-      function initGallery(images) {
-        const div = document.getElementById('target');
-        let titlePlate = document.createElement('div');
-        let img = document.createElement('img');
-        titlePlate.className = 'titlePlate';
-        div.appendChild(img);
-        div.appendChild(titlePlate);
+      #target {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+      }
 
-        const mount = (work, index) => {
-          titlePlate.innerHTML = `
+      .italic {
+        font-style: italic;
+      }
+
+      h2,
+      h3,
+      p {
+        margin: 0;
+        margin-bottom: 4px;
+      }
+
+      h2 {
+        font-size: 14px;
+      }
+
+      h3 {
+        font-size: 14px;
+      }
+
+      p {
+        font-size: 10px;
+      }
+
+      .titlePlate {
+        position: absolute;
+        z-index: 999;
+        bottom: 4px;
+        left: 4px;
+        padding: 4px;
+        color: white;
+        background: rgba(12, 12, 12, 0.2);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="target">&nbsp;</div>
+    <script type="text/javascript">
+      (function () {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        function getRandomInt(max) {
+          return Math.floor(Math.random() * Math.floor(max));
+        }
+
+        function initGallery(images) {
+          const div = document.getElementById('target');
+          let titlePlate = document.createElement('div');
+          let img = document.createElement('img');
+          titlePlate.className = 'titlePlate';
+          div.appendChild(img);
+          div.appendChild(titlePlate);
+
+          const mount = (work, index) => {
+            titlePlate.innerHTML = `
                 <h3>E. Konetzni (b. 1983, Albuquerque, N.M.)</h3>
                 <h2><span class="italic">${work.title}</span>, ${work.date}</h2>
                 <p>Post-industrial waste ${index} of ${images.length}</p>
                 `;
-          img.src = encodeURIComponent(work.url);
-          img.style.height = '100%';
-          img.style.width = '100%';
-          div.setAttribute('data-current-index', index);
-        };
+            img.src = encodeURIComponent(work.url);
+            img.style.height = '100%';
+            img.style.width = '100%';
+            div.setAttribute('data-current-index', index);
+          };
 
-        const start = urlParams.get('beginAt') || getRandomInt(images.length - 1);
-        mount(images[start], start);
+          const start =
+            urlParams.get('beginAt') || getRandomInt(images.length - 1);
+          mount(images[start], start);
 
-        const _advance = e => {
-          const currentIndex = Number(div.getAttribute('data-current-index'));
-          const newIndex =
-            currentIndex >= (images.length - 1) ? 0 : currentIndex + 1;
-          mount(images[newIndex], newIndex);
+          const _advance = (e) => {
+            const currentIndex = Number(div.getAttribute('data-current-index'));
+            const newIndex =
+              currentIndex >= images.length - 1 ? 0 : currentIndex + 1;
+            mount(images[newIndex], newIndex);
+          };
+
+          const _retreat = (e) => {
+            const currentIndex = Number(div.getAttribute('data-current-index'));
+            const newIndex =
+              currentIndex <= 0 ? images.length - 1 : currentIndex - 1;
+            mount(images[newIndex], newIndex);
+          };
+
+          const _keyEvents = (e) => {
+            if (e.keyCode === 39) {
+              _advance(e);
+            } else if (e.keyCode === 37) {
+              _retreat(e);
+            }
+          };
+
+          div.addEventListener('click', _advance);
+          window.addEventListener('keydown', _keyEvents);
         }
 
-        const _retreat = e => {
-          const currentIndex = Number(div.getAttribute('data-current-index'));
-          const newIndex =
-            currentIndex <= 0 ? (images.length - 1) : currentIndex - 1;
-          mount(images[newIndex], newIndex);
-        }
-
-        const _keyEvents = e => {
-          if (e.keyCode === 39) {
-            _advance(e);
-          } else if (e.keyCode === 37) {
-            _retreat(e);
-          }
-        }
-
-        div.addEventListener('click', _advance);
-        window.addEventListener('keydown', _keyEvents);
-      }
-
-      fetch('manifest.json')
-        .then(res => res.json())
-        .then(manifest => manifest.images)
-        .then(images => initGallery(images));
-    })();
-  </script>
-</body>
-
+        fetch('manifest.json')
+          .then((res) => res.json())
+          .then((manifest) => manifest.images)
+          .then((images) => initGallery(images));
+      })();
+    </script>
+  </body>
 </html>

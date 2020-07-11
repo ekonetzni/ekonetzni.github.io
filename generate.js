@@ -11,22 +11,40 @@ const _date = timestamp => {
   return `${d.getFullYear()}`;
 };
 
-const images = prefixes.reduce((acc, prefix) => {
-  return [
-    ...acc,
-    ...fs.readdirSync(prefix).map(fileName => {
-      const tags = regex.exec(fileName);
+// probably pretty slow
+const sortByMtime = (a, b) => {
+  const atime = fs.statSync(a).mtime.getTime();
+  const btime = fs.statSync(b).mtime.getTime();
+  return atime - btime;
+};
 
-      return {
-        url: `${prefix}/${fileName}`,
-        title: tags[2],
-        date: _date(tags[1])
-      };
-    })];
-}, []);
+const mapFileNameToImageData = prefix => fileName => {
+  const tags = regex.exec(fileName);
+
+  return {
+    url: `${prefix}/${fileName}`,
+    title: tags[2],
+    date: _date(tags[1]),
+  };
+};
+
+const addIndex = (image, index) => ({
+  ...image,
+  index,
+});
+
+const images = prefixes
+  .sort(sortByMtime)
+  .reduce((acc, prefix) => {
+    return [
+      ...acc,
+      ...fs.readdirSync(prefix).map(mapFileNameToImageData(prefix)),
+    ];
+  }, [])
+  .map(addIndex);
 
 const mainfest = {
-  images
+  images,
 };
 
 fs.writeFileSync('./manifest.json', JSON.stringify(mainfest), { flags: 'w' });

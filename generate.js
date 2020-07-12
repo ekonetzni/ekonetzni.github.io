@@ -38,13 +38,15 @@ const reducePrefixes = (acc, prefix) => [
   ...fs.readdirSync(prefix).map(mapFileNameToImageData(prefix)),
 ];
 
-const images = prefixes
-  .sort(sortByMtime)
-  .reduce(reducePrefixes, [])
-  .map(addIndex);
+const generate = () => {
+  const images = prefixes
+    .sort(sortByMtime)
+    .reduce(reducePrefixes, [])
+    .map(addIndex);
 
-const mainfest = {
-  images,
+  fs.writeFileSync('./manifest.json', JSON.stringify({ images }), {
+    flags: 'w',
+  });
 };
 
-fs.writeFileSync('./manifest.json', JSON.stringify(mainfest), { flags: 'w' });
+generate();

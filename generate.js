@@ -33,14 +33,14 @@ const addIndex = (image, index) => ({
   index,
 });
 
+const reducePrefixes = (acc, prefix) => [
+  ...acc,
+  ...fs.readdirSync(prefix).map(mapFileNameToImageData(prefix)),
+];
+
 const images = prefixes
   .sort(sortByMtime)
-  .reduce((acc, prefix) => {
-    return [
-      ...acc,
-      ...fs.readdirSync(prefix).map(mapFileNameToImageData(prefix)),
-    ];
-  }, [])
+  .reduce(reducePrefixes, [])
   .map(addIndex);
 
 const mainfest = {

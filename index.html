@@ -39,6 +39,10 @@
         justify-content: center;
       }
 
+      a, a:visited {
+        color: rgb(226, 23, 23)
+      }
+
       @media (min-width: 480px) {
         body {
           background-position: center;
@@ -52,23 +56,71 @@
       #content {
         display: flex;
         flex-direction: column;
-        padding: 10px;
         max-width: 740px;
-        background: rgba(255, 255, 255, 0.8);
         margin: auto;
       }
+
+      #content .inner {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 16px;
+        margin: 16px;
+        font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        font-size: 16px;
+      }
+
+      #instagram {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+      }
+
+      #instagram .icon img {
+        height: 32px;
+        width: 32px;
+      }
     </style>
+    <script type="text/javascript">
+      (async function () {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        function getRandomInt(max) {
+          return Math.floor(Math.random() * Math.floor(max));
+        }
+
+        const images = await fetch('manifest.json')
+          .then((res) => res.json())
+          .then((manifest) => manifest.images);
+        
+        const bground = images[getRandomInt(images.length - 1)];
+        document.body.style.backgroundImage = `url('${bground.url}')`;
+      })();
+    </script>
   </head>
 
   <body>
     <div id="content">
-      <h1>Elliot Konetzni</h1>
-      <h2><a href="about.html">About</a></h2>
-      <h2><a href="current.html">Current Project</a></h2>
-      <h2>
-        <a href="boxmaker.html">The Boxmaker Project</a>
-      </h2>
-      <h2><a href="mailto:elliot@konetzni.com">Contact</a></h2>
+      <div class="inner">
+        <p>
+          E Konetzni is a multidisclipinary artist from Albuquerque, New Mexico currently
+          living in Amsterdam. He has a background in computer science and
+          fine arts, and works across the fields of painting, photography and
+          digital automation. </p>
+        <p>
+          His work explores themes of ownership and
+          autonomy amongst the backdrop of chaos we've collectively built, 
+          which is really a fancy way to say he does what the fuck he wants.</p>
+        <p>
+          Please enjoy.
+        </p>
+        <p>
+          Please checkout <a href="https://www.instagram.com/ekonetzni/">his work on instagram</a> or <br />
+          drop him <a href="mailto:elliot@konetzni.com">a line via email</a>.
+        </p>
+      </div>
+    </div>
+
+    <div id="instagram">
+      <a class="icon" href="https://www.instagram.com/ekonetzni/"><img src="icons/480px-Instagram_icon.webp" /></a>
     </div>
   </body>
 </html>

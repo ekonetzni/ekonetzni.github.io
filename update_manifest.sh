@@ -6,4 +6,6 @@ git merge -m "new works" origin/painter2
 
 node generate.js
 git add manifest.json
+git add webp
+git add jpg-manifest.json
 git commit -m "New manifest"

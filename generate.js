@@ -1,10 +1,12 @@
 const fs = require('fs');
+const { execSync } = require('child_process');
 
 // Gives us the timestamp at index 1
 // Gives us the name at index 2.
 const regex = /([0-9]{10}\.[0-9]{1,})-(.*)\..*\.[a-z0-9]*$/;
 
 const prefixes = ['img/gen1i', 'img/faces'];
+const webpDir = 'webp';
 
 const _date = timestamp => {
   const d = new Date(timestamp * 1000);
@@ -44,7 +46,24 @@ const generate = () => {
     .reduce(reducePrefixes, [])
     .map(addIndex);
 
-  fs.writeFileSync('./manifest.json', JSON.stringify({ images }), {
+  fs.writeFileSync('./jpg-manifest.json', JSON.stringify({ images }), {
+    flags: 'w',
+  });
+
+  images.forEach(image => {
+    const outPath = `${webpDir}/${image.url}.webp`;
+    try{
+      if(fs.existsSync(outPath)) {
+        return;
+      }
+      execSync(`./bin/cwebp -q 100 "${image.url}" -o "${outPath}"`);
+    } catch (err) {
+      console.error(`Could not process ${image.url}`);
+    }
+  });
+  
+  const webps = images.map(img => ({...img, url: `${webpDir}/${img.url}`}));
+  fs.writeFileSync('./manifest.json', JSON.stringify({ images: webps }), {
     flags: 'w',
   });
 };

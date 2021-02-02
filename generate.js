@@ -62,7 +62,7 @@ const generate = () => {
     }
   });
   
-  const webps = images.map(img => ({...img, url: `${webpDir}/${img.url}`}));
+  const webps = images.map(img => ({...img, url: `${webpDir}/${img.url}.webp`}));
   fs.writeFileSync('./manifest.json', JSON.stringify({ images: webps }), {
     flags: 'w',
   });

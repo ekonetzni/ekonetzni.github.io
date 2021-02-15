@@ -41,16 +41,12 @@ const reducePrefixes = (acc, prefix) => [
 ];
 
 const generate = () => {
-  const images = prefixes
+  const jpgs = prefixes
     .sort(sortByMtime)
     .reduce(reducePrefixes, [])
     .map(addIndex);
 
-  fs.writeFileSync('./jpg-manifest.json', JSON.stringify({ images }), {
-    flags: 'w',
-  });
-
-  images.forEach(image => {
+  jpgs.forEach(image => {
     const outPath = `${webpDir}/${image.url}.webp`;
     try{
       if(fs.existsSync(outPath)) {
@@ -62,8 +58,8 @@ const generate = () => {
     }
   });
   
-  const webps = images.map(img => ({...img, url: `${webpDir}/${img.url}.webp`}));
-  fs.writeFileSync('./manifest.json', JSON.stringify({ images: webps }), {
+  const webps = jpgs.map(img => ({...img, url: `${webpDir}/${img.url}.webp`}));
+  fs.writeFileSync('./manifest.json', JSON.stringify({ jpgs, images: webps }), {
     flags: 'w',
   });
 };

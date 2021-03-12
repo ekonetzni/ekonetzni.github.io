@@ -46,6 +46,8 @@ const generate = () => {
     .reduce(reducePrefixes, [])
     .map(addIndex);
 
+  const errors = [];
+
   jpgs.forEach(image => {
     const outPath = `${webpDir}/${image.url}.webp`;
     try{
@@ -55,11 +57,16 @@ const generate = () => {
       execSync(`./bin/cwebp -q 100 "${image.url}" -o "${outPath}"`);
     } catch (err) {
       console.error(`Could not process ${image.url}`);
+      errors.push(image);
     }
   });
   
   const webps = jpgs.map(img => ({...img, url: `${webpDir}/${img.url}.webp`}));
   fs.writeFileSync('./manifest.json', JSON.stringify({ jpgs, images: webps }), {
+    flags: 'w',
+  });
+  // Write errors
+  fs.writeFileSync('./errors.json', JSON.stringify(errors.map(i => i.url)), {
     flags: 'w',
   });
 };

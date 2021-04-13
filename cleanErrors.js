@@ -1,8 +1,12 @@
 const { execSync } = require('child_process');
 const errors = require('./errors.json');
 
-const strip = str => str.replace(/[\`’]/g, "'");
-const escape = str => str.replace(/[\\$'"]/g, "\\$&");
-const clean = str => escape(strip(str));
+const escape = str => str.replace(/[\\$'"`’]/g, "\\$&");
 
-errors.forEach(path => execSync(`git rm "./${clean(path)}"`), { cwd: '.'});
+errors.forEach(path => {
+  try {
+    execSync(`git rm "./${escape(path)}"`, { cwd: '.'}); 
+  } catch (e) {
+    console.error(e);
+  }
+});

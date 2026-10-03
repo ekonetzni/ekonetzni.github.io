@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Boxmaker 2.1: works by E. Konetzni and the machine">
+    <title>E. Konetzni - Boxmaker 2.1</title>
+    <style>
+      :root { --bg: #fff; --fg: #111; --muted: #666; --plate: rgba(12, 12, 12, 0.72); }
+      @media (prefers-color-scheme: dark) {
+        :root { --bg: #0c0c0c; --fg: #eee; --muted: #999; }
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg);
+        font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; }
+      header { padding: 16px; }
+      h1, h2, h3, p { margin: 0 0 4px; font-size: 14px; }
+      header p, .count { font-size: 12px; color: var(--muted); }
+      ul { list-style: none; margin: 0; padding: 0 16px 32px; display: grid; gap: 8px;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
+      li a { display: block; color: inherit; text-decoration: none; }
+      li img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9;
+        object-fit: cover; background: #222; }
+      li a:hover img, li a:focus-visible img { opacity: 0.85; }
+      .caption { display: block; padding: 4px 0 0; font-size: 11px; line-height: 1.3; }
+      dialog { padding: 0; border: 0; background: transparent; max-width: 100vw; max-height: 100vh;
+        width: 100vw; height: 100vh; }
+      dialog::backdrop { background: rgba(0, 0, 0, 0.92); }
+      .stage { position: relative; width: 100%; height: 100%; display: flex;
+        align-items: center; justify-content: center; }
+      .stage video { width: 100%; height: 100%; object-fit: contain; display: block; }
+      .plate { position: absolute; left: 12px; bottom: 12px; padding: 6px 8px;
+        color: #fff; background: var(--plate); pointer-events: none; }
+      .plate p { font-size: 10px; }
+      .controls button { position: absolute; border: 0; background: var(--plate); color: #fff;
+        font: 20px/1 Arial, sans-serif; width: 44px; height: 44px; cursor: pointer; }
+      .controls button:focus-visible { outline: 2px solid #fff; }
+      .close { top: 12px; right: 12px; }
+      .prev { left: 12px; top: 50%; transform: translateY(-50%); }
+      .next { right: 12px; top: 50%; transform: translateY(-50%); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h3>E. Konetzni (b. 1983, Albuquerque, N.M.)</h3>
+      <h2>Boxmaker 2.1</h2>
+      <p>Six seconds of a video found for a headline, from the moment faces appear, painted
+        frame by frame and played backwards, with its sound. <span class="count">17 works.</span></p>
+    </header>
+    <ul>
+      <li>
+        <a href="works/1791036064.70.mp4" data-index="0">
+          <img src="thumbs/1791036064.70.jpg" alt="Networks Dominance over Military Challenges" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Networks Dominance over Military Challenges</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791035954.59.mp4" data-index="1">
+          <img src="thumbs/1791035954.59.jpg" alt="Wonder's Talking and Songs" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Wonder's Talking and Songs</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791035833.87.mp4" data-index="2">
+          <img src="thumbs/1791035833.87.jpg" alt="Game Theory Explains Why Win" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Game Theory Explains Why Win</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791035710.07.mp4" data-index="3">
+          <img src="thumbs/1791035710.07.jpg" alt="Flames as French Protests" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Flames as French Protests</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791035598.07.mp4" data-index="4">
+          <img src="thumbs/1791035598.07.jpg" alt="Know in Forces Rebels to Retreat" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Know in Forces Rebels to Retreat</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791035479.35.mp4" data-index="5">
+          <img src="thumbs/1791035479.35.jpg" alt="Alternative Absolute from Reviews Officials" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Alternative Absolute from Reviews Officials</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791035363.18.mp4" data-index="6">
+          <img src="thumbs/1791035363.18.jpg" alt="Experiment Songwriting against Machine the Humans" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Experiment Songwriting against Machine the Humans</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791035237.57.mp4" data-index="7">
+          <img src="thumbs/1791035237.57.jpg" alt="Winter First Review the Last" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Winter First Review the Last</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791035108.12.mp4" data-index="8">
+          <img src="thumbs/1791035108.12.jpg" alt="Quiz Periodic Show and Learn Table" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Quiz Periodic Show and Learn Table</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791034809.75.mp4" data-index="9">
+          <img src="thumbs/1791034809.75.jpg" alt="Nations vs League" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Nations vs League</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791034696.83.mp4" data-index="10">
+          <img src="thumbs/1791034696.83.jpg" alt="Plane for Search Begins" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Plane for Search Begins</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791034495.84.mp4" data-index="11">
+          <img src="thumbs/1791034495.84.jpg" alt="Handbook Programmer's Competitive" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Handbook Programmer's Competitive</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791034379.04.mp4" data-index="12">
+          <img src="thumbs/1791034379.04.jpg" alt="Military Immunity a Allegations" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Military Immunity a Allegations</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791034186.54.mp4" data-index="13">
+          <img src="thumbs/1791034186.54.jpg" alt="Laundered Humorous Financial" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Laundered Humorous Financial</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791034072.87.mp4" data-index="14">
+          <img src="thumbs/1791034072.87.jpg" alt="Trump More Says than Auto-Enrolled Children" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Trump More Says than Auto-Enrolled Children</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791033954.91.mp4" data-index="15">
+          <img src="thumbs/1791033954.91.jpg" alt="Fashion What Ballet's Go and Gala" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Fashion What Ballet's Go and Gala</i>, October 3, 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="works/1791033826.21.mp4" data-index="16">
+          <img src="thumbs/1791033826.21.jpg" alt="Arena Will the Honors at Held" loading="lazy" width="480" height="270">
+          <span class="caption"><i>Arena Will the Honors at Held</i>, October 3, 2026</span>
+        </a>
+      </li>
+    </ul>
+    <dialog aria-label="Work">
+      <div class="stage">
+        <video controls loop playsinline></video>
+        <div class="plate">
+          <h3>E. Konetzni (b. 1983, Albuquerque, N.M.)</h3>
+          <h2><i class="title"></i>, <span class="date"></span></h2>
+          <p>Boxmaker 2.1, <span class="number"></span> of 17</p>
+        </div>
+        <div class="controls">
+          <button class="close" aria-label="Close">×</button>
+          <button class="prev" aria-label="Previous">‹</button>
+          <button class="next" aria-label="Next">›</button>
+        </div>
+      </div>
+    </dialog>
+    <script>
+      (() => {
+        const works = [{"id":"1791036064.70","title":"Networks Dominance over Military Challenges","date":"October 3, 2026"},{"id":"1791035954.59","title":"Wonder's Talking and Songs","date":"October 3, 2026"},{"id":"1791035833.87","title":"Game Theory Explains Why Win","date":"October 3, 2026"},{"id":"1791035710.07","title":"Flames as French Protests","date":"October 3, 2026"},{"id":"1791035598.07","title":"Know in Forces Rebels to Retreat","date":"October 3, 2026"},{"id":"1791035479.35","title":"Alternative Absolute from Reviews Officials","date":"October 3, 2026"},{"id":"1791035363.18","title":"Experiment Songwriting against Machine the Humans","date":"October 3, 2026"},{"id":"1791035237.57","title":"Winter First Review the Last","date":"October 3, 2026"},{"id":"1791035108.12","title":"Quiz Periodic Show and Learn Table","date":"October 3, 2026"},{"id":"1791034809.75","title":"Nations vs League","date":"October 3, 2026"},{"id":"1791034696.83","title":"Plane for Search Begins","date":"October 3, 2026"},{"id":"1791034495.84","title":"Handbook Programmer's Competitive","date":"October 3, 2026"},{"id":"1791034379.04","title":"Military Immunity a Allegations","date":"October 3, 2026"},{"id":"1791034186.54","title":"Laundered Humorous Financial","date":"October 3, 2026"},{"id":"1791034072.87","title":"Trump More Says than Auto-Enrolled Children","date":"October 3, 2026"},{"id":"1791033954.91","title":"Fashion What Ballet's Go and Gala","date":"October 3, 2026"},{"id":"1791033826.21","title":"Arena Will the Honors at Held","date":"October 3, 2026"}];
+        const dialog = document.querySelector('dialog');
+        const video = dialog.querySelector('video');
+        let current = 0;
+
+        const show = index => {
+          current = (index + works.length) % works.length;
+          const work = works[current];
+          video.src = 'works/' + work.id + '.mp4';
+          video.poster = 'thumbs/' + work.id + '.jpg';
+          dialog.querySelector('.title').textContent = work.title;
+          dialog.querySelector('.date').textContent = work.date;
+          dialog.querySelector('.number').textContent = current + 1;
+          video.play().catch(() => {});
+        };
+
+        document.querySelectorAll('li a').forEach(link =>
+          link.addEventListener('click', event => {
+            event.preventDefault();
+            dialog.showModal();
+            show(Number(link.dataset.index));
+          })
+        );
+        // Every way of closing goes through here, so the video never plays
+        // on unseen: browsers don't reliably fire the dialog's close event.
+        const stop = () => {
+          if (!video.getAttribute('src')) return;
+          video.pause();
+          video.removeAttribute('src');
+          video.load();
+        };
+        const hide = () => {
+          stop();
+          dialog.close();
+        };
+        // However else the dialog closes, stop the video too.
+        new MutationObserver(() => dialog.open || stop()).observe(dialog, {
+          attributes: true,
+          attributeFilter: ['open'],
+        });
+
+        dialog.querySelector('.close').addEventListener('click', hide);
+        dialog.querySelector('.prev').addEventListener('click', () => show(current - 1));
+        dialog.querySelector('.next').addEventListener('click', () => show(current + 1));
+        // A click on the backdrop, not the video or its controls, closes it.
+        dialog.querySelector('.stage').addEventListener('click', event => {
+          if (event.target === event.currentTarget) hide();
+        });
+        dialog.addEventListener('cancel', event => {
+          event.preventDefault();
+          hide();
+        });
+        document.addEventListener('keydown', event => {
+          if (!dialog.open) return;
+          if (event.key === 'Escape') hide();
+          if (event.key === 'ArrowRight') show(current + 1);
+          if (event.key === 'ArrowLeft') show(current - 1);
+        });
+      })();
+    </script>
+  </body>
+</html>
